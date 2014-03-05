@@ -1,0 +1,29 @@
+{
+  "name": "node-siebel-tutorial",
+  "description": "Demonstration of Siebel SOAP connections.",
+  "version": "0.0.1",
+  "author": "Pravici <sales@pravici.com>",
+  "repository": "",
+  "main": "app.js",
+  "dependencies": {
+    "coffee-script": "*",
+    "lodash": "*",
+    "law": "*",
+    "law-connect": "*",
+    "torch": "*",
+    "soap": "*"
+  },
+  "devDependencies": {
+    "should": "*",
+    "connect": "*",
+    "request": "*",
+    "mocha": "*"
+  },
+  "engines": {
+    "node": ">= 0.4.0"
+  },
+  "private": true,
+  "scripts": {
+    "test": "mocha"
+  }
+}
