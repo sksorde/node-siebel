@@ -1,3 +1,0 @@
-# helper to locate files relative to project root
-{join} = require 'path'
-module.exports = (paths...) -> join __dirname, paths...

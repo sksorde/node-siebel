@@ -4,8 +4,7 @@ lawAdapter = require 'law-connect'
 logger = require 'torch'
 _ = require 'lodash'
 
-rel = require '../rel'
-methodMapping = require rel 'lib/methodMapping'
+methodMapping = require './methodMapping'
 
 module.exports = (client) ->
 
@@ -42,10 +41,10 @@ module.exports = (client) ->
               # forward the request to the node-soap client
               mFn message, (err, result) ->
 
-                if err
-                  logger.red _.pick result, ['headers', 'statusCode']
-                else
-                  logger.yellow {err, result}
+                #if err
+                  #logger.red _.pick result, ['headers', 'statusCode']
+                #else
+                  #logger.yellow {err, result}
 
                 done err, result
 

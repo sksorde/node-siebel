@@ -6,18 +6,18 @@
   "repository": "",
   "main": "app.js",
   "dependencies": {
-    "coffee-script": "*",
+    "coffee-script": ">1.7.0",
     "lodash": "*",
     "law": "*",
     "law-connect": "*",
-    "torch": "*",
-    "soap": "*"
+    "torch": "*"
   },
   "devDependencies": {
     "should": "*",
+    "mocha": "*",
     "connect": "*",
     "request": "*",
-    "mocha": "*"
+    "soap": "*"
   },
   "engines": {
     "node": ">= 0.4.0"
