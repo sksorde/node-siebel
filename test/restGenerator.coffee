@@ -23,6 +23,53 @@ describe 'Generator', ->
 
       done()
 
+  it 'should create an order', (done) ->
+    @timeout 0
+
+    # Create a node-soap client based on this WSDL.
+    getClient 'OrderWebService.WSDL', (err, client) ->
+
+      # generate a set of services (can be called programmatically)
+      {services} = restGenerator(client)
+
+      # get our sample order
+      body = require rel 'data/order_sample'
+
+      # send the request to the SOAP API
+      services['Order/InsertOrder'] body, (err, result) ->
+
+        if err
+          logger.blue _.pick result, ['headers', 'statusCode']
+        else
+          logger.blue {err, result}
+
+        should.not.exist err
+        should.exist result
+
+        done()
+
+  it 'should list orders', (done) ->
+    @timeout 0
+
+    # Create a node-soap client based on this WSDL.
+    getClient 'OrderWebService.WSDL', (err, client) ->
+
+      # generate a set of services (can be called programmatically)
+      {services} = restGenerator(client)
+
+      body = {OrderNumber: '1-7SDFTMXYZW'}
+
+      services['Order/GetOrder'] body, (err, result) ->
+
+        if err
+          logger.blue _.pick result, ['headers', 'statusCode']
+        else
+          logger.blue {err, result}
+
+        should.not.exist err
+        should.exist result
+
+        done()
 
   it 'should generate REST API', (done) ->
     @timeout 0
@@ -54,3 +101,4 @@ describe 'Generator', ->
           response.statusCode.should.eql 200
 
           done()
+
