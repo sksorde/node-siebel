@@ -20,19 +20,19 @@ You can find a reference for the Siebel Order Management API [here](http://docs.
 
 # What You’ll Need
 
-## Siebel instance v7.8 or later
+### Siebel instance v7.8 or later
 
 I’m going to assume that if you’re reading this article you’re probably already using Siebel and have an instance available.
 
-## Node.js v0.10.0 or later
+### Node.js v0.10.0 or later
 
 You’ll need this to run our sample code.  Node includes a package manager (npm) which will bring in all the other dependencies we need.
 
-## A terminal
+### A terminal
 
 If you’re in Windows I’d recommend [git-bash](https://help.github.com/articles/set-up-git#platform-windows).
 
-## A text editor
+### A text editor
 
 Whatever you’re comfortable with here.  My code is written in CoffeeScript with 2 spaces for indentation, so if you’re going to edit that, make sure you’re not mixing tabs in or you’ll get strange syntax errors.
 
@@ -43,7 +43,7 @@ The primary responsibilities we’ve taken on with node-siebel are:
 1. Generate services that can be called programmatically.  We make some assumptions about the data formats in an attempt to make your life easier, so this probably won’t work for a non-Siebel API.
 2. Create a REST router for the services and hand it back to you.  This is something you can plug in as express/connect/http middleware in node, and start serving your REST endpoints in just a few lines of code.
 
-Let’s walk through the included tests, which should give you a sense of how to utilize this functionality in your own app.  Go ahead and open the tests, which you’ll find [here](https://github.com/Pravici/node-siebel/blob/master/test/restGenerator.coffee).
+Let’s walk through the included tests, which should give you a sense of how to utilize this functionality in your own app.  Go ahead and open the tests, which you’ll find [here](https://github.com/Pravici/node-siebel/blob/master/test/serviceGenerator.coffee).
 
 The first test, “should generate services” shows the services that will be generated from the sample WSDL, which is for the Order service.  Each “service” in our world corresponds to a “method” in the SOAP world.
 
@@ -59,7 +59,7 @@ You’ll notice that in addition to returning a set of services, the serviceGene
 
 The code used to configure the connect middleware and start a server is standard boilerplate, and well documented in the [Connect](http://www.senchalabs.org/connect/) project.
 
-# Communicating with Your Own Siebel Services
+# Using Your Own Siebel Services
 
 Assuming your API follows the same conventions as the Siebel standard methods, things will be easy.  (Nothing is easy though, so brace yourself.)
 
@@ -85,9 +85,9 @@ Let’s go grab one from Administration - Web Services.
 
 For reference, the Administrative - Web Services screen should look like this:
 
-![web services interface](https://github.com/Pravici/node-siebel/blob/master/docs/webservices.png "Web Services interface")
+![web services interface](https://raw.github.com/Pravici/node-siebel/master/docs/webservices.png "Web Services interface")
 
-Towards the end of your WSDL file you will find one or more <soap:address> fields.  You’ll need to modify the hostnames to match the actual location of your dev server.  I found in my tests that I needed to change SecureWebService to WebService, and add &amp;WSSOAP=1 at the end.  Here’s [some info](http://docs.oracle.com/cd/E14004_01/books/EAI2/EAI2_WebServices32.html) about the setting.
+Towards the end of your WSDL file you will find one or more &lt;soap:address&gt; fields.  You’ll need to modify the hostnames to match the actual location of your dev server.  I found in my tests that I needed to change SecureWebService to WebService, and add &amp;WSSOAP=1 at the end.  Here’s [some info](http://docs.oracle.com/cd/E14004_01/books/EAI2/EAI2_WebServices32.html) about the setting.
 
 ## Connecting
 
@@ -99,7 +99,7 @@ You can probably just use the node-soap client directly if you just need program
 
 ## Option B: REST Access
 
-Follow the example on the node-siebel project [README](https://github.com/Pravici/node-siebel/blob/master/README.md).
+Follow the example on in the main [README](https://github.com/Pravici/node-siebel/blob/master/README.md).  This should have everything you need.
 
 # Conclusion
 

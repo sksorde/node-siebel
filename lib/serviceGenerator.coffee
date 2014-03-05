@@ -48,7 +48,7 @@ module.exports = (client) ->
 
                 done err, result
 
-              logger.magenta client.lastRequest
+              #logger.magenta client.lastRequest
           }
 
         # generate route definitions
