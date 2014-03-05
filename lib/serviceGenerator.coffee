@@ -25,7 +25,7 @@ module.exports = (client) ->
       for m, mFn of methods # methods
 
         serviceName = "#{portName}/#{m}"
-        logger.blue {serviceName}
+        #logger.blue {serviceName}
 
         # generate law services
         do (portHeader, portName, m, mFn) ->
