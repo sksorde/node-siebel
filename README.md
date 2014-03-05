@@ -15,7 +15,13 @@ npm install -g mocha
 mocha
 ```
 
+# Tutorial
+
+For more details and background, please see the [tutorial](https://github.com/Pravici/node-siebel/blob/master/docs/tutorial.md).
+
 # Create A REST Server
+
+With some minor changes, this should allow you to start a REST server that forwards requests to a node-soap client.
 
 This is from [example.js](https://github.com/Pravici/node-siebel/blob/master/example/example.js).
 
@@ -70,10 +76,7 @@ anything else
 POST /order/<action>  =>  Order/<action>
 ```
 
-# Tutorial
-
-For more details and background, please see the [tutorial](https://github.com/Pravici/node-siebel/blob/master/docs/tutorial.md).
-
 ## Copyright
 
 Copyright (c) 2014 Pravici, LLC
+License: MIT
