@@ -12,7 +12,7 @@ module.exports = (client) ->
   routeDefs = []
 
   # loop through services/ports/methods
-  soapServices = _.filter _.keys(client), (k) -> /WebService/.test k
+  soapServices = _.filter _.keys(client), (k) -> /Service/.test k
   for s in soapServices # services
     for p, methods of client[s] # ports
       portName = p.match(/(.+)Port/)?[1]
