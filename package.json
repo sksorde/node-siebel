@@ -1,11 +1,11 @@
 {
   "name": "node-siebel",
   "description": "Demonstration of Siebel SOAP connections.",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "Pravici <sales@pravici.com>",
   "repository": {
-      "type": "git"
-    , "url": "git://github.com/pravici/node-siebel",
+    "type": "git",
+    "url": "git://github.com/pravici/node-siebel"
   },
   "homepage": "https://github.com/pravici/node-siebel",
   "main": "app.js",

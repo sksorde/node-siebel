@@ -19,8 +19,8 @@ module.exports = (client) ->
       portName ?= p
 
       portHeader = {}
-      portHeader["ListOf#{portName}"] = {}
-      portHeader["ListOf#{portName}"]["ListOf#{portName}Header"] = {}
+      #portHeader["ListOf#{portName}"] = {}
+      #portHeader["ListOf#{portName}"]["ListOf#{portName}Header"] = {}
 
       for m, mFn of methods # methods
 
@@ -35,8 +35,9 @@ module.exports = (client) ->
               if /Get(.*)ById/.test m
                 message = {'PrimaryRowId': args['Id']}
               else
-                message = _.clone portHeader
-                message["ListOf#{portName}"]["ListOf#{portName}Header"][portName] = args
+                message = args
+                #message = _.clone portHeader
+                #message["ListOf#{portName}"]["ListOf#{portName}Header"][portName] = args
 
               # forward the request to the node-soap client
               mFn message, (err, result) ->
