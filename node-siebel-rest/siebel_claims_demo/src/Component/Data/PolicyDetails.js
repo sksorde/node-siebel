@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 
-import {Popover} from 'react-bootstrap';
+import {Popover, OverlayTrigger} from 'react-bootstrap';
+import {CSSTransition} from 'react-transition-group';
+
 
 class PolicyDetails extends Component {
+
   constructor(props) {
     super(props);
     const { policy } = props.match.params;
@@ -12,34 +15,7 @@ class PolicyDetails extends Component {
       policyDetails: [],
       show: false
     };
-    this.handleHide = this.handleHide.bind(this);
   }
-
-  // componentDidMount() {
-  //   var url = 'http://127.0.0.1:9999/claims/policyDetails/12345';
-  //   var res = fetch(url, {
-  //         method: "GET", // *GET, POST, PUT, DELETE, etc.
-  //         mode: "no-cors", // no-cors, cors, *same-origin,
-  //         credentials: "omit",
-  //         headers: {
-  //             "Content-Type": "application/json",
-  //             "Access-Control-Allow-Origin": "http://127.0.0.1:3000",
-  //             "Access-Control-Allow-Headers": "Content-Type",
-  //             "Access-Control-Allow-Methods": "GET"
-  //         },
-  //         //body: JSON.stringify(body), // body data type must match "Content-Type" header
-  //     }).then(function(response) {
-  //     return response;
-  //   })
-  //   .then(function(myJson) {
-  //         return myJson;
-  //       })
-  //   .catch((error) => {
-  //           console.error(error);
-  //           return error;
-  //         });
-  //     this.setState({isLoaded: true, details: res});
-  // }
 
   componentDidMount() {
     this.callApi()
@@ -58,17 +34,12 @@ class PolicyDetails extends Component {
     return body;
   };
 
-  handleHide() {
-    this.setState({show: false});
-  }
-
   render() {
     return (
+     <div>
+        <p>Policy Number: { this.state.policyDetails.policyNumber }</p>
+      </div>
 
-          <div>
-            <p>Policy Details for { this.state.policyNumber }</p>
-            Policy: { this.state.policyDetails.policyNumber}
-          </div>
     );
   }
 }

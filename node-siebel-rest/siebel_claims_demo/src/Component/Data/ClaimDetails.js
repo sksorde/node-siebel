@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
-
+import { TweenMax, Back } from "gsap/all";
+import { Popover } from 'react-bootstrap';
 import ClaimRow from './ClaimRow';
+import TransitionGroup from 'react-transition-group/TransitionGroup';
 
-const DETAILS = [
-  {claimNumber: '1-L78XTX', lossDate:'', policyNumber: 'KM-VEH-005', lastName: 'tester', firstName: 'first1', policyType: 'AUTO', status: 'OPEN', lossCode:''},
-  {claimNumber: '1-OOCR13', lossDate: '', policyNumber: '1G1156K01', lastName: 'tester', firstName: 'first2', policyType: 'AUTO', status: 'OPEN', lossCode:''},
-  {claimNumber: '1710118', lossDate: '', policyNumber: '1K9087TY02', lastName: 'tester', firstName: 'first3', policyType: 'AUTO', status: 'OPEN', lossCode:''},
-  {claimNumber: '1710675', lossDate: '', policyNumber: 'KM-VEH-006', lastName: 'tester', firstName: 'first1', policyType: 'AUTO', status: 'OPEN', lossCode:''},
-  {claimNumber: '1711379', lossDate: '', policyNumber: '1A456YU009', lastName: 'tester', firstName: 'first2', policyType: 'AUTO', status: 'OPEN', lossCode:''}
-];
+
 class ClaimDetails extends Component {
   constructor(props) {
     super(props);
@@ -16,10 +12,24 @@ class ClaimDetails extends Component {
     this.state = {
       claimNumber: `${claim}`,
       claimDetails: [],
-      isLoaded: false
+      isLoaded: false,
+      toggle: true
     };
   }
 
+ componentWillEnter(callback) {
+   const elem = this.container;
+   TweenMax.from(elem, 0.5, {height: 0, ease:Back.easeOut, onComplete: callback});
+ }
+
+ componentWillLeave(callback) {
+   const elem = this.container;
+   TweenMax.from(elem, 0.5, {height: 0, opacity: '0', ease:Back.easeIn, onComplete: callback});
+ }
+
+ toggle() {
+   this.setState({toggle: !this.state.toggle});
+ }
   componentDidMount() {
     this.callApi()
       .then(res => {
@@ -41,9 +51,10 @@ class ClaimDetails extends Component {
     return (
           <div>
             {this.state.isLoaded ? '' : 'loading ...'}
-            <p>Local details { this.state.claimNumber }</p>
-              <ClaimRow claim={this.state.claimDetails}
-              key={this.state.claimNumber}/>
+            <a onClick={ this.toggle }>Local details { this.state.claimNumber }</a>
+              { this.state.toggle &&
+                <ClaimRow claim={this.state.claimDetails} key={this.state.claimNumber}/>
+              }
           </div>
     );
   }

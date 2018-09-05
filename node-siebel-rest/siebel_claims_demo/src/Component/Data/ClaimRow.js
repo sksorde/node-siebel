@@ -1,25 +1,46 @@
 import React, { Component } from 'react';
+import { Grid, Row, Col } from 'react-bootstrap';
 
 class ClaimRow extends Component {
+  toggle() {
+
+  }
   render() {
     const claim = this.props.claim;
 
     return (
-      <table>
-      <tbody>
-      <tr>
-        <td>Claim Number: {claim.claimNumber}</td>
-        <td>Loss Date: {claim.lossDate}</td>
-      </tr>
-      <tr>
-        <td>Policy Number: {claim.policyNumber}</td>
-      </tr>
-      <tr>
-        <td>Last Name: {claim.lastName}</td>
-        <td>First Name: {claim.firstName}</td>
-      </tr>
-      </tbody>
-      </table>
+      <Grid className="show-grid">
+        <Row>
+          <Col xs={6} md={4}>
+            <code>Last Name: {claim.lastName}</code>
+          </Col>
+          <Col xs={6} md={4}>
+            <code>First Name: {claim.firstName}</code>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={6} md={4}>
+            <code>Claim #: {claim.claimNumber}</code>
+          </Col>
+          <Col xs={6} md={4}>
+            <code>Policy #: {claim.policyNumber}</code>
+          </Col>
+          <Col xs={6} md={4}>
+            <code>Policy Type: {claim.policyType}</code>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={6} md={4}>
+            <code>Status: {claim.status}</code>
+          </Col>
+          <Col xsHidden md={4}>
+            <code>Loss Date: {claim.lossDate}</code>
+          </Col>
+          <Col xs={6} md={4}>
+            <code>Loss Code: {claim.lossCode}</code>
+          </Col>
+        </Row>
+    </Grid>
     );
   }
 }

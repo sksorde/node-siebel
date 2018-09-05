@@ -35,6 +35,8 @@ router.get('/claimDetails/:claimId', (req, res) => {
     var data = JSON.stringify({claimDetails:DETAILS.find(detail => {
               return detail.claimNumber === req.params.claimId }) 
                   });
+    res.set({'Content-Type': 'Application/json',
+             'Access-Control-Allow-Origin': '*'});
     res.status(200).jsonp(data);
     console.log(data);
 })
@@ -43,6 +45,8 @@ router.get('/policyDetails/:policyId', (req, res) => {
     var data = JSON.stringify({policyDetails:DETAILS.find(detail => {
               return detail.policyNumber === req.params.policyId }) 
                   });
+    res.set({'Content-Type': 'Application/json',
+             'Access-Control-Allow-Origin': '*'});
     res.status(200).jsonp(data);
     console.log(data);
 })
