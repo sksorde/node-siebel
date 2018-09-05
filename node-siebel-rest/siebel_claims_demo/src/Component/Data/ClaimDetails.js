@@ -37,37 +37,13 @@ class ClaimDetails extends Component {
     return body;
   };
 
-  // componentDidMount() {
-  //   var url = 'http://127.0.0.1:9999/claims/claimDetails/12345';
-  //   var res = fetch(url, {
-  //         method: "GET", // *GET, POST, PUT, DELETE, etc.
-  //         mode: "no-cors", // no-cors, cors, *same-origin,
-  //         credentials: "omit",
-  //         headers: {
-  //             "Content-Type": "application/json",
-  //             "Access-Control-Allow-Origin": "http://127.0.0.1:3000",
-  //             "Access-Control-Allow-Headers": "Content-Type",
-  //             "Access-Control-Allow-Methods": "GET"
-  //         },
-  //         //body: JSON.stringify(body), // body data type must match "Content-Type" header
-  //     }).then(response => { return response.json()})
-  //   .then(myJson => { return myJson.claims })
-  //   .catch((error) => {
-  //           console.error(error);
-  //           return error;
-  //         });
-  //     this.setState({isLoaded: true, details: res});
-  // }
-
   render() {
     return (
           <div>
             {this.state.isLoaded ? '' : 'loading ...'}
             <p>Local details { this.state.claimNumber }</p>
-            {this.state.claimDetails.map(detail => {
-                  return(<ClaimRow claim={detail} />);
-                })
-            }
+              <ClaimRow claim={this.state.claimDetails}
+              key={this.state.claimNumber}/>
           </div>
     );
   }
