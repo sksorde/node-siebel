@@ -39,6 +39,12 @@ router.get('/claimDetails/:claimId', (req, res) => {
     console.log(data);
 })
 
-router.get('/policyDetails/:user', (req, res) => res.send('policy details'));
+router.get('/policyDetails/:policyId', (req, res) => {
+    var data = JSON.stringify({policyDetails:DETAILS.find(detail => {
+              return detail.policyNumber === req.params.policyId }) 
+                  });
+    res.status(200).jsonp(data);
+    console.log(data);
+})
 
 module.exports = router;
