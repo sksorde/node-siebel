@@ -32,7 +32,9 @@ router.get('/allClaims/:user', function(req, res) {
 })
 
 router.get('/claimDetails/:claimId', (req, res) => { 
-    var data = JSON.stringify({claimDetails:DETAILS});
+    var data = JSON.stringify({claimDetails:DETAILS.find(detail => {
+              return detail.claimNumber === req.params.claimId }) 
+                  });
     res.status(200).jsonp(data);
     console.log(data);
 })
