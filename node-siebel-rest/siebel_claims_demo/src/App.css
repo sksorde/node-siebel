@@ -46,3 +46,10 @@ html {
    color: white;
    text-decoration: none;
  }
+
+ .modal-container {
+  position: relative;
+}
+.modal-container .modal, .modal-container .modal-backdrop {
+  position: absolute;
+}
