@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { TweenMax, Back } from "gsap/all";
 import { Popover } from 'react-bootstrap';
 import ClaimRow from './ClaimRow';
 import TransitionGroup from 'react-transition-group/TransitionGroup';
@@ -19,12 +18,12 @@ class ClaimDetails extends Component {
 
  componentWillEnter(callback) {
    const elem = this.container;
-   TweenMax.from(elem, 0.5, {height: 0, ease:Back.easeOut, onComplete: callback});
+   //TweenMax.from(elem, 0.5, {height: 0, ease:Back.easeOut, onComplete: callback});
  }
 
  componentWillLeave(callback) {
    const elem = this.container;
-   TweenMax.from(elem, 0.5, {height: 0, opacity: '0', ease:Back.easeIn, onComplete: callback});
+   //TweenMax.from(elem, 0.5, {height: 0, opacity: '0', ease:Back.easeIn, onComplete: callback});
  }
 
  toggle() {
