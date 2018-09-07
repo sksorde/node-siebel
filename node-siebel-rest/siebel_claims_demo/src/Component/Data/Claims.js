@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-
-import ClaimRow from './ClaimRow';
 import ClaimTableRender from './ClaimTableRender';
 
 class Claims extends Component {
   render() {
-      const filterText = this.props.filterText;
+      //const filterText = this.props.filterText;
 
       // const rows = [];
       //

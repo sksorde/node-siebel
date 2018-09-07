@@ -2,7 +2,6 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 const Navigate = () => {
-  let claim = "test";
   return (
     <nav>
      <ul>
@@ -11,8 +10,8 @@ const Navigate = () => {
       } exact>Home</NavLink>
       </li>
       <li>
-        <NavLink to="/allClaims" activeStyle={ {color:'green', fontWeight: 'bold'}
-      } exact>AllClaims</NavLink>
+        <NavLink to="/claims" activeStyle={ {color:'green', fontWeight: 'bold'}
+      }>AllClaims</NavLink>
       </li>
      </ul>
     </nav>

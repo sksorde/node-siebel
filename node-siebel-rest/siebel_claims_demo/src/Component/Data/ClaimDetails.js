@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { Popover } from 'react-bootstrap';
 import ClaimRow from './ClaimRow';
-import TransitionGroup from 'react-transition-group/TransitionGroup';
-
+import { Modal } from 'react-router-modal';
 
 class ClaimDetails extends Component {
   constructor(props) {
@@ -11,31 +9,24 @@ class ClaimDetails extends Component {
     this.state = {
       claimNumber: `${claim}`,
       claimDetails: [],
-      isLoaded: false,
-      toggle: true
+      show: false
     };
   }
 
- componentWillEnter(callback) {
-   const elem = this.container;
-   //TweenMax.from(elem, 0.5, {height: 0, ease:Back.easeOut, onComplete: callback});
- }
-
- componentWillLeave(callback) {
-   const elem = this.container;
-   //TweenMax.from(elem, 0.5, {height: 0, opacity: '0', ease:Back.easeIn, onComplete: callback});
- }
-
- toggle() {
-   this.setState({toggle: !this.state.toggle});
- }
-  componentDidMount() {
+  componentWillMount() {
     this.callApi()
       .then(res => {
-        this.setState({claimDetails: JSON.parse(res).claimDetails, isLoaded: true});
+        this.setState({claimDetails: JSON.parse(res).claimDetails, show: true});
         })
       .catch(err => console.log(err));
   }
+
+  close = (e) => {
+    this.setState({show: false});
+    const { history } = this.props;
+    history.push("/claims");
+    e.stopPropagation();
+  };
 
   callApi = async () => {
     const response = await fetch('http://127.0.0.1:9999/claims/claimDetails/' + this.state.claimNumber);
@@ -48,13 +39,10 @@ class ClaimDetails extends Component {
 
   render() {
     return (
-          <div>
-            {this.state.isLoaded ? '' : 'loading ...'}
-            <a onClick={ this.toggle }>Local details { this.state.claimNumber }</a>
-              { this.state.toggle &&
-                <ClaimRow claim={this.state.claimDetails} key={this.state.claimNumber}/>
-              }
-          </div>
+      this.state.show &&
+          <Modal onBackdropClick={this.close}>
+            <ClaimRow claim={this.state.claimDetails}/>
+          </Modal>
     );
   }
 }

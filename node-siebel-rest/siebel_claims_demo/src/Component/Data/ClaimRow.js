@@ -1,12 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
 
-class ClaimRow extends Component {
-  toggle() {
 
-  }
-  render() {
-    const claim = this.props.claim;
+const ClaimRow = ({ claim }) => {
 
     return (
       <Grid className="show-grid">
@@ -42,7 +38,6 @@ class ClaimRow extends Component {
         </Row>
     </Grid>
     );
-  }
-}
+};
 
 export default ClaimRow;

@@ -8,7 +8,7 @@ class ClaimTableRender extends Component {
   claimFormatter(cell, row) {
     return (
       <div>
-        <NavLink to={`/claimDetails/${cell}`}>{cell}</NavLink>
+        <NavLink to={`/claims/claimDetails/${cell}`}>{cell}</NavLink>
       </div>
     );
   }
@@ -16,7 +16,7 @@ class ClaimTableRender extends Component {
   policyFormatter(cell, row) {
     return (
       <div>
-        <NavLink to={`/policyDetails/${cell}`}>{cell}</NavLink>
+        <NavLink to={`/claims/policyDetails/${cell}`}>{cell}</NavLink>
       </div>
     );
   }

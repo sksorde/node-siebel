@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-
-import {Popover, OverlayTrigger} from 'react-bootstrap';
-import {CSSTransition} from 'react-transition-group';
-
+import { Modal } from 'react-router-modal';
 
 class PolicyDetails extends Component {
 
@@ -11,13 +8,12 @@ class PolicyDetails extends Component {
     const { policy } = props.match.params;
     this.state = {
       policyNumber: `${policy}`,
-      isLoaded: false,
       policyDetails: [],
       show: false
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.callApi()
       .then(res => {
         this.setState({policyDetails: JSON.parse(res).policyDetails, isLoaded: true, show: true});
@@ -34,12 +30,19 @@ class PolicyDetails extends Component {
     return body;
   };
 
+  close = (e) => {
+    this.setState({show: false});
+    const { history } = this.props;
+    history.push("/claims");
+    e.stopPropagation();
+  };
+
   render() {
     return (
-     <div>
+      this.state.show &&
+     <Modal onBackdropClick={this.close}>
         <p>Policy Number: { this.state.policyDetails.policyNumber }</p>
-      </div>
-
+      </Modal>
     );
   }
 }

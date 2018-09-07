@@ -12,7 +12,7 @@ class AllClaims extends Component {
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.callApi()
       .then(res => {
         this.setState({claims: JSON.parse(res).claims, isLoaded: true});
@@ -31,9 +31,8 @@ class AllClaims extends Component {
 
   render() {
     return (
+      this.state.isLoaded &&
       <div>
-      {this.state.isLoaded ? '': 'loading ...'}
-
       <Claims claims={this.state.claims} />
       </div>
     );
