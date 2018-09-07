@@ -43,7 +43,11 @@ class PolicyDetails extends Component {
     return (
       this.state.show &&
      <Modal onBackdropClick={this.close} id="one">
-        <p>Policy Number: { this.state.policyDetails.policyNumber }</p>
+        <p>Policy Number: { this.state.policyDetails.policyNumber } <br/>
+         ......
+         Details to follow
+        </p>
+
       </Modal>
     );
   }
