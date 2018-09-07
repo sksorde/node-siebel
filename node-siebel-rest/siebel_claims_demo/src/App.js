@@ -43,7 +43,7 @@ class App extends Component {
               </ModalRoute>
           </div>
         </Router>
-        <ModalContainer/>
+        <ModalContainer id="modal-container"/>
       </div>
     );
   }

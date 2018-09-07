@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+
 import { Modal } from 'react-router-modal';
+import './../../App.css';
 
 class PolicyDetails extends Component {
 
@@ -40,7 +42,7 @@ class PolicyDetails extends Component {
   render() {
     return (
       this.state.show &&
-     <Modal onBackdropClick={this.close}>
+     <Modal onBackdropClick={this.close} id="one">
         <p>Policy Number: { this.state.policyDetails.policyNumber }</p>
       </Modal>
     );

@@ -47,27 +47,100 @@ html {
    text-decoration: none;
  }
 
- .modal {
-   position: fixed;
-   top: 50%;
-   left: 50%;
-   transform: translate3d(-50%, -50%, 0);
-   background-color: white;
-   border-radius: 5px;
-   border: 1px solid #777;
-   padding: 2rem;
-   min-width: 20rem;
-   max-width: 60rem;
-   width: 90%;
-   opacity: 0;
- }
+#modal-container {
+  position:fixed;
+  display:table;
+  height:100%;
+  width:100%;
+  top:0;
+  left:0;
+  transform:scale(0);
+  z-index:1;
 
- .modal-in  {
-   transition: opacity 0.5s ease-in;
-   opacity: 1
- }
+  .one {
+    transform:scale(1);
+    .modal-background {
+      background:rgba(0,0,0,.0);
+      animation: fadeIn .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+      .modal {
+        opacity:0;
+        animation: scaleUp .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+      }
+    }
+    + .content {
+      animation: scaleBack .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+    }
+    &.out {
+      animation: quickScaleDown 0s .5s linear forwards;
+      .modal-background {
+        animation: fadeOut .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+        .modal {
+           animation: scaleDown .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+        }
+      }
+      + .content {
+        animation: scaleForward .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+      }
+    }
+  }
+}
 
- .modal-out {
-   transition: opacity 0.3s ease-out;
-   opacity: 0
- }
+.content {
+  min-height:100%;
+  height:100%;
+  background:white;
+  position:relative;
+  z-index:0;
+  h1 {
+    padding:75px 0 30px 0;
+    text-align:center;
+    font-size:30px;
+    line-height:30px;
+  }
+  .buttons {
+    max-width:800px;
+    margin:0 auto;
+    padding:0;
+    text-align:center;
+    .button {
+      display:inline-block;
+      text-align:center;
+      padding:10px 15px;
+      margin:10px;
+      background:red;
+      font-size:18px;
+      background-color:#efefef;
+      border-radius:3px;
+      box-shadow:0 1px 2px rgba(0,0,0,.3);
+      cursor:pointer;
+      &:hover {
+        color:white;
+        background:#009bd5;
+      }
+    }
+  }
+}
+
+@keyframes unfoldIn {
+  0% {
+    transform:scaleY(.005) scaleX(0);
+  }
+  50% {
+    transform:scaleY(.005) scaleX(1);
+  }
+  100% {
+    transform:scaleY(1) scaleX(1);
+  }
+}
+
+@keyframes unfoldOut {
+  0% {
+    transform:scaleY(1) scaleX(1);
+  }
+  50% {
+    transform:scaleY(.005) scaleX(1);
+  }
+  100% {
+    transform:scaleY(.005) scaleX(0);
+  }
+}

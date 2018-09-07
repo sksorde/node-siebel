@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ClaimRow from './ClaimRow';
 import { Modal } from 'react-router-modal';
+import './../../App.css';
 
 class ClaimDetails extends Component {
   constructor(props) {
@@ -40,7 +41,8 @@ class ClaimDetails extends Component {
   render() {
     return (
       this.state.show &&
-          <Modal onBackdropClick={this.close}>
+          <Modal onBackdropClick={this.close}
+          id="one">
             <ClaimRow claim={this.state.claimDetails}/>
           </Modal>
     );
