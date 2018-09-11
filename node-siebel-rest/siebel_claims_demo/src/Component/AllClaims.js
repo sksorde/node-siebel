@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import Claims from './Data/Claims';
 import myConfig from '../config/Config';
-import callGetApi from '../util/rest';
+import { callGetApi } from '../util/rest';
 
 class AllClaims extends Component {
 

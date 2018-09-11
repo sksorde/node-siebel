@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Modal } from 'react-router-modal';
 import './../../App.css';
 import myConfig from '../../config/Config';
-import callGetApi from '../../util/rest';
+import { callGetApi } from '../../util/rest';
 
 class PolicyDetails extends Component {
 

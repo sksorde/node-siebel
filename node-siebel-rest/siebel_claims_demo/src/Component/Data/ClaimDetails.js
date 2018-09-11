@@ -3,7 +3,7 @@ import ClaimRow from './ClaimRow';
 import { Modal } from 'react-router-modal';
 import './../../App.css';
 import myConfig from '../../config/Config';
-import callGetApi from '../../util/rest';
+import { callGetApi } from '../../util/rest';
 
 class ClaimDetails extends Component {
   constructor(props) {
