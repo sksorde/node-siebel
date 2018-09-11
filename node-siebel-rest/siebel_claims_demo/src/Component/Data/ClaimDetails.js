@@ -3,6 +3,7 @@ import ClaimRow from './ClaimRow';
 import { Modal } from 'react-router-modal';
 import './../../App.css';
 import myConfig from '../../config/Config';
+import callApi from '../../util/rest';
 
 class ClaimDetails extends Component {
   constructor(props) {
@@ -16,7 +17,8 @@ class ClaimDetails extends Component {
   }
 
   componentWillMount() {
-    this.callApi()
+    var url = myConfig.siebelUrl + '/claims/claimDetails/' + this.state.claimNumber;
+    callApi(url)
       .then(res => {
         this.setState({claimDetails: JSON.parse(res).claimDetails, show: true});
         })
@@ -28,16 +30,6 @@ class ClaimDetails extends Component {
     const { history } = this.props;
     history.push("/claims");
     e.stopPropagation();
-  };
-
-  callApi = async () => {
-    var url = myConfig.siebelUrl + '/claims/claimDetails/' + this.state.claimNumber;
-    const response = await fetch(url);
-    const body = await response.json();
-
-    if (response.status !== 200) throw Error(body.message);
-
-    return body;
   };
 
   render() {
