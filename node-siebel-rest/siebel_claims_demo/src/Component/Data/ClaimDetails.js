@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ClaimRow from './ClaimRow';
 import { Modal } from 'react-router-modal';
 import './../../App.css';
+import myConfig from '../../config/Config';
 
 class ClaimDetails extends Component {
   constructor(props) {
@@ -30,7 +31,8 @@ class ClaimDetails extends Component {
   };
 
   callApi = async () => {
-    const response = await fetch('http://127.0.0.1:9999/claims/claimDetails/' + this.state.claimNumber);
+    var url = myConfig.siebelUrl + '/claims/claimDetails/' + this.state.claimNumber;
+    const response = await fetch(url);
     const body = await response.json();
 
     if (response.status !== 200) throw Error(body.message);

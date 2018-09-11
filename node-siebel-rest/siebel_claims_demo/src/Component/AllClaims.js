@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import Claims from './Data/Claims';
+import myConfig from '../config/Config';
 
 class AllClaims extends Component {
 
@@ -21,7 +22,8 @@ class AllClaims extends Component {
   }
 
   callApi = async () => {
-    const response = await fetch('http://127.0.0.1:9999/claims/allClaims/aj');
+    var url = myConfig.siebelUrl + '/claims/allClaims/' + myConfig.siebelUser;
+    const response = await fetch(url);
     const body = await response.json();
 
     if (response.status !== 200) throw Error(body.message);
