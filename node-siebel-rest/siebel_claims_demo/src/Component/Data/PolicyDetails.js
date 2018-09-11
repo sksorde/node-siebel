@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Modal } from 'react-router-modal';
 import './../../App.css';
 import myConfig from '../../config/Config';
-import callApi from '../../util/rest';
+import callGetApi from '../../util/rest';
 
 class PolicyDetails extends Component {
 
@@ -19,7 +19,7 @@ class PolicyDetails extends Component {
 
   componentWillMount() {
     var url = myConfig.siebelUrl + '/claims/policyDetails/' + this.state.policyNumber;
-    callApi(url)
+    callGetApi(url)
       .then(res => {
         this.setState({policyDetails: JSON.parse(res).policyDetails, isLoaded: true, show: true});
         })

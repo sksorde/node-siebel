@@ -1,6 +1,5 @@
 
-const callApi = async (url) => {
-  //var url = myConfig.siebelUrl + '/claims/allClaims/' + myConfig.siebelUser;
+const callGetApi = async (url) => {
   const response = await fetch(url, {
       method: "GET", // *GET, POST, PUT, DELETE, etc.
       mode: "cors", // no-cors, cors, *same-origin
@@ -22,4 +21,4 @@ const callApi = async (url) => {
   return body;
 };
 
-export default callApi;
+export default callGetApi;

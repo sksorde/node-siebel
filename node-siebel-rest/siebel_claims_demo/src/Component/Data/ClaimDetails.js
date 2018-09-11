@@ -3,7 +3,7 @@ import ClaimRow from './ClaimRow';
 import { Modal } from 'react-router-modal';
 import './../../App.css';
 import myConfig from '../../config/Config';
-import callApi from '../../util/rest';
+import callGetApi from '../../util/rest';
 
 class ClaimDetails extends Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class ClaimDetails extends Component {
 
   componentWillMount() {
     var url = myConfig.siebelUrl + '/claims/claimDetails/' + this.state.claimNumber;
-    callApi(url)
+    callGetApi(url)
       .then(res => {
         this.setState({claimDetails: JSON.parse(res).claimDetails, show: true});
         })

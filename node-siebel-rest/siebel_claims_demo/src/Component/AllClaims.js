@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import Claims from './Data/Claims';
 import myConfig from '../config/Config';
-import callApi from '../util/rest';
+import callGetApi from '../util/rest';
 
 class AllClaims extends Component {
 
@@ -16,7 +16,7 @@ class AllClaims extends Component {
 
   componentWillMount() {
     var url = myConfig.siebelUrl + '/claims/allClaims/' + myConfig.siebelUser;
-    callApi(url)
+    callGetApi(url)
       .then(res => {
         this.setState({claims: JSON.parse(res).claims, isLoaded: true});
         })
