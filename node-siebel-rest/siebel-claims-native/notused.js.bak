@@ -1,0 +1,69 @@
+import React from 'react';
+import { TouchableHighlight,
+         StyleSheet,
+         Text,
+         View,
+         Button,
+         ImageBackground,
+         KeyboardAvoidingView
+       } from 'react-native';
+
+import colors from './utils/colors';
+import getImage from './utils/getImage';
+import StartDemo from './components/startDemo';
+
+export default class App extends React.Component {
+  constructor() {
+    super();
+    this.onPress = this.onPress.bind(this);
+  }
+  onPress() {
+    <View backgroundColor={colors.grey}><Text>pressed hightlight</Text></View>
+  }
+  render() {
+    return (
+      <KeyboardAvoidingView style={styles.container} behavior="padding">
+          <View style = {styles.detailsContainer}>
+          <Text style={[styles.textStyle, styles.largeText]}>Integration</Text>
+          <Text style={[styles.textStyle, styles.largeText]}>With </Text>
+          <Text style={[styles.textStyle, styles.largeText]}>Siebel Rest Service</Text>
+          </View>
+          <StartDemo />
+          <ImageBackground source={getImage('pravici')} style={styles.imageContainer} imageStyle={styles.image}>
+      </ImageBackground>
+      </KeyboardAvoidingView>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+      backgroundColor: 'skyblue',
+        flex: 1,
+    },
+    detailsContainer: {
+    flex: 2,
+    justifyContent: 'center',
+    paddingHorizontal: 20,
+    },
+    textStyle: {
+      textAlign: 'center',
+      fontFamily: 'AvenirNext-Regular' ,
+    },
+    largeText: {
+      fontSize: 34,
+    },
+    buttonStyle: {
+      fontSize: 24,
+      backgroundColor: 'grey',
+    },
+    imageContainer: {
+      flex: 3,
+    },
+    image: {
+      width: 100,
+      height: 100,
+      flex: 3,
+      resizeMode: 'center',
+    },
+});
