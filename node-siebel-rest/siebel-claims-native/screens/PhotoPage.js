@@ -14,19 +14,11 @@ import myConfig from '../config/Config';
 import { callGetApi } from '../utils/rest';
 import ClaimRow from '../components/ClaimRow';
 
-const mapClaim = claim => {
-  const { claimNumber, status, lossDate, policyNumber } = claim;
-  return {
-    key: uuidv4(),
-    claimNumber, status, lossDate, policyNumber,
-  };
-};
 
-const keyExtractor = ( { claimNumber } ) => claimNumber;
-export default class ReviewClaims extends Component {
+export default class PhotoPage extends Component {
 
   static navigationOptions = ({ navigation: { navigate } }) => ({
-    title: 'Review Claims',
+    title: 'Photo Gallery',
   });
 
   state = {

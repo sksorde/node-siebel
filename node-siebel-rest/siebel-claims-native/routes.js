@@ -3,7 +3,8 @@ import { StackNavigator } from 'react-navigation';
 import PolicyDetails from './screens/PolicyDetails';
 import ReviewClaims from './screens/ReviewClaims';
 import ClaimDetails from './screens/ClaimDetails';
-//import AddClaim from './screens/AddClaim';
+import AddClaim from './screens/AddClaim';
+import PhotoPage from './screens/PhotoPage';
 
 export default StackNavigator(
   {
@@ -16,9 +17,12 @@ export default StackNavigator(
     ClaimDetails: {
       screen: ClaimDetails,
     },
-    // AddClaim: {
-    //   screen: AddClaim,
-    // },
+    AddClaim: {
+      screen: AddClaim,
+    },
+    PhotoPage: {
+      screen: PhotoPage,
+    },
   },
   {
     initialRouteName: 'PolicyDetails',

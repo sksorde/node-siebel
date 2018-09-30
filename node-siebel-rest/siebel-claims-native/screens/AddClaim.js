@@ -1,15 +1,26 @@
 import React, { Component } from 'react';
-
-import myConfig from '../../config/Config';
-import { callGetApi } from '../../util/rest';
+import {
+  StyleSheet,
+  View,
+  TouchableHighlight,
+  Text,
+  Image,
+  ActivityIndicator,
+} from 'react-native';
+import { callGetApi } from '../utils/rest';
 import myConfig from '../config/Config';
+import colors from '../utils/colors';
+import TouchableDetailListItem from '../components/TouchableDetailListItem';
 
 export default class AddClaim extends Component {
-  const state = {
+  static navigationOptions = ({ navigation: { navigate } }) => ({
+    title: 'Add Accident Claim',
+  });
+  state = {
       loading: true,
       error: false,
-    };
-  }
+      claimDetails: '',
+  };
 
   async updateSiebel() {
     var url = myConfig.siebelUrl + '/claims/addClaim/' + myConfig.customer;
@@ -26,28 +37,26 @@ export default class AddClaim extends Component {
   }
 
   render() {
-    const { loading, claimDetails, error } = this.state;
+    const { navigation: { navigate } } = this.props;
     return (
       <View style={styles.container}>
-        {loading && <ActivityIndicator size="large" />}
-        {error && <Text>Error...</Text>}
-        {!loading &&
-          !error && (
-            <FlatList
-              data={contactsSorted}
-              keyExtractor={keyExtractor}
-              renderItem={this.renderClaim}
-            />
-          )}
-      </View>
-    );
+      <TouchableDetailListItem icon="info" title="Accident Type " rightIcon="chevron-right" />
+      <TouchableDetailListItem icon="date-range" title="Date & Location" rightIcon="chevron-right" />
+      <TouchableDetailListItem
+        icon="camera"
+        title="Pictures of the Incident"
+        rightIcon="chevron-right"
+        onPress = {() => navigate('PhotoPage', { claim: this.state.claimNumber })}
+      />
+      <TouchableDetailListItem icon="verified-user" title="Contact Info" rightIcon="chevron-right" />
+      <TouchableDetailListItem icon="traffic" title="Other Driver's Info" rightIcon="chevron-right" />
+    </View>
+  );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
-    justifyContent: 'center',
     flex: 1,
   },
 });

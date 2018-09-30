@@ -1,22 +1,25 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, TouchableHighlight, } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import PropTypes from 'prop-types';
 
 import colors from '../utils/colors';
 
-export default function DetailListItem({ icon, title, subtitle, }) {
+export default function TouchableDetailListItem({ icon, title, subtitle, rightIcon=false, onPress }) {
   return (
-    <View style={styles.borderContainer}>
-      <View style={styles.wrapper}>
-        <View style={styles.container}>
+    <TouchableHighlight
+      underlayColor={colors.grey}
+      style={styles.touchContainer}
+      onPress={onPress}
+    >
+    <View style={[styles.wrapper]}>
           {icon && (
             <Icon
               name={icon}
               size={24}
               style={{
                 color: colors.black,
-                marginRight: 20,
+                marginLeft: 20,
               }}
             />
           )}
@@ -24,25 +27,33 @@ export default function DetailListItem({ icon, title, subtitle, }) {
             <Text style={[styles.title]}>{title}</Text>
             {subtitle && <Text style={styles.subtitle}>{subtitle}</Text>}
           </View>
-        </View>
-      </View>
+            {rightIcon && (<Icon
+              name={rightIcon}
+              size={24}
+              style={{
+                color: colors.black,
+              }}
+              />
+            )}
     </View>
+  </TouchableHighlight>
   );
 }
 
-DetailListItem.propTypes = {
+TouchableDetailListItem.propTypes = {
   icon: PropTypes.string,
   title: PropTypes.string.isRequired,
   subtitle: PropTypes.string,
+  rightIcon: PropTypes.string,
 };
 
-DetailListItem.defaultProps = {
+TouchableDetailListItem.defaultProps = {
   icon: null,
   subtitle: null,
 };
 
 const styles = StyleSheet.create({
-  borderContainer: {
+  touchContainer: {
     paddingLeft: 24,
   },
   wrapper: {
@@ -60,6 +71,7 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     justifyContent: 'center',
+    marginLeft: 6,
     flex: 1,
   },
   title: {
