@@ -57,7 +57,7 @@ export default class PolicyDetails extends Component {
                 </View>
               </View>
             </View>
-            <TouchableHighlight onPress={() => 'test'}>
+            <TouchableHighlight onPress={() => {}}>
             <View>
             <Icon.Button name="times-circle-o" backgroundColor="#3b5998"
               onPress={() => this.props.navigation.navigate('ReviewClaims')}>
