@@ -39,7 +39,7 @@ export default class ClaimDetails extends Component {
   async componentDidMount() {
     const { navigation: { state: { params } } } = this.props;
     const { claim } = params;
-    var url = myConfig.siebelUrl + '/claims/claimDetails/' + encodeURIComponent(claim);
+    var url = myConfig.simUrl + '/claims/claimDetails/' + encodeURIComponent(claim);
     try {
       const claimDetails = await this.getClaimDetails(url);
       this.setState({claimDetails: claimDetails,loading: false, error: false,});

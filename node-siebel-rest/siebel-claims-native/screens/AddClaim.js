@@ -26,14 +26,22 @@ export default class AddClaim extends Component {
   };
 
   async postNewClaim(url, data) {
-    const json = await callPostApi(url, data);
-    return json.claim;
+    const jsondata = await callPostApi(url, data);
+    console.log('json:', jsondata);
+    return jsondata.claim;
   }
 
-  async updateSiebel() {
+ async updateSiebel() {
    try {
-      var url = myConfig.siebelUrl + '/claims/addClaim/' + encodeURIComponent(myConfig.customer);
+     var url = myConfig.simUrl + '/claims/addClaim/' + encodeURIComponent(myConfig.customer);
+      //var url = `https://13.58.101.5:9301/siebel/v1.0/data/Demo INS Claims/INS Claims/`;
       data = {
+        Id: 'New Claim',
+        "Asset Id": '1-3H01',
+        "Location Description": "parking lot Thom Thumb store facing Renner Rd",
+        "Loss Date - Non UTC": "10/01/2018 06:00:00",
+      };
+      simdata = {
         claimType: 'accident',
         accidentType: 'other car',
         location: 'text field',
@@ -42,7 +50,8 @@ export default class AddClaim extends Component {
         policyNumber: 'KM-VEH-005',
       };
       this.setState({adding: "adding",});
-      const claim = await this.postNewClaim(url, data);
+      //const claim = callPostApi(url, data, this.postNewClaim);
+      const claim = await this.postNewClaim(url, simdata);
       this.setState({claim: claim, error: false, adding: "true,"});
       const { navigation: { navigate } } = this.props;
       navigate('ReviewClaims');

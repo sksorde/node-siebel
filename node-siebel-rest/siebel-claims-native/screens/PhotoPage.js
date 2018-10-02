@@ -34,7 +34,7 @@ export default class PhotoPage extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.inputMethodEditor}>
-          <ImageGrid onPressImage={this.handlePressImage} />
+          <ImageGrid onPressImage={() => {}} />
         </View>
       </View>
     );

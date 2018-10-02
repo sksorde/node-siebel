@@ -4,6 +4,7 @@ import {
   StyleSheet,
   View,
   TouchableHighlight,
+  ActivityIndicator,
   Text,
   Image,
 } from 'react-native';
@@ -20,43 +21,59 @@ export default class PolicyDetails extends Component {
     super(props);
     this.state = {
       customer: myConfig.customer,
-      policyDetails: [],
+      policyDetails: {},
       loading: true,
       error: false,
     };
   }
 
   async getPolicyDetails(url) {
-    const json = await callGetApi(url);
-    return json.policyDetails;
+    try {
+      const json = await callGetApi(url);
+      console.log('json: ' + JSON.stringify(json));
+      return json;
+    } catch (e) {
+        console.log(e.message);
+        throw e;
+    }
   }
 
-  async componentWillMount() {
-    var url = myConfig.siebelUrl + '/claims/policyDetails/' + encodeURIComponent(this.state.customer);
+  async componentDidMount() {
+    //var url = `${myConfig.siebelUrl}/siebel/v1.0/data/Contact/Contact/${myConfig.customerId}/INS Policy`;
+    var url = myConfig.simUrl + '/claims/policyDetails/' + encodeURIComponent(this.state.customer);
     try {
+      console.log(url);
       const policyDetails = await this.getPolicyDetails(url);
-      console.log(policyDetails);
-      this.setState({policyDetails: policyDetails, isLoaded: true, show: true});
+      console.log("policyDetails:", policyDetails);
+      this.setState({policyDetails: policyDetails, loading: false, error: false});
     } catch (e) {
         this.setState({
         loading: false,
-        error: true,
+        error: e.message,
       });
     }
   }
 
   render() {
+    const { loading, policyDetails, error, } = this.state;
+    console.log("policyDetails:Id", policyDetails["Id"]);
     return (
+      <View>
+        {loading && <ActivityIndicator size="large" />}
+        {error && <Text>Error trying to setup: {error}</Text>}
+        {!loading &&
+          !error && (
       <View style={styles.borderContainer}>
             <View style={styles.wrapper}>
               <View style={styles.container}>
                 <View style={styles.contentContainer}>
-                  <Text style={[styles.title]}>Policy #: {this.state.policyDetails.policyNumber}</Text>
-                  <Text style={styles.subtitle}>Policy type: {this.state.policyDetails.policyType}</Text>
-                  <Text style={styles.subtitle}>Expires: 10/10/2020</Text>
+                  <Text style={[styles.title]}>Policy #: {policyDetails["Id"]}</Text>
+                  <Text style={styles.subtitle}>Policy type: {policyDetails["Type"]}</Text>
+                  <Text style={styles.subtitle}>{policyDetails["Policy Expiration Date"]}}</Text>
                 </View>
               </View>
             </View>
+
             <TouchableHighlight onPress={() => {}}>
             <View>
             <Icon.Button name="times-circle-o" backgroundColor="#3b5998"
@@ -70,6 +87,8 @@ export default class PolicyDetails extends Component {
             </View>
             </TouchableHighlight>
         </View>
+      )}
+              </View>
     );
   }
 }

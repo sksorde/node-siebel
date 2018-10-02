@@ -37,7 +37,7 @@ export default class ReviewClaims extends Component {
   };
 
   async componentDidMount() {
-    var url = myConfig.siebelUrl + '/claims/allClaims/' + encodeURIComponent(this.state.holder);
+    var url = myConfig.simUrl + '/claims/allClaims/' + encodeURIComponent(this.state.holder);
     try {
       const claims = await this.getClaims(url);
       this.setState({claims,loading: false, error: false,});
