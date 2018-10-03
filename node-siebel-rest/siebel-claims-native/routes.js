@@ -25,6 +25,6 @@ export default StackNavigator(
     },
   },
   {
-    initialRouteName: 'PolicyDetails',
+    initialRouteName: 'AddClaim',
   },
 );

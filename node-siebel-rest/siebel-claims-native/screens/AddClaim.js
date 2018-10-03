@@ -28,30 +28,31 @@ export default class AddClaim extends Component {
   async postNewClaim(url, data) {
     const jsondata = await callPostApi(url, data);
     console.log('json:', jsondata);
-    return jsondata.claim;
+    return jsondata['Id'];
   }
 
  async updateSiebel() {
    try {
-     var url = myConfig.simUrl + '/claims/addClaim/' + encodeURIComponent(myConfig.customer);
+      var url = `${myConfig.simUrl}/claims/addClaim/${myConfig.customer}`;
       //var url = `https://13.58.101.5:9301/siebel/v1.0/data/Demo INS Claims/INS Claims/`;
+      console.log(url);
       data = {
         Id: 'New Claim',
         "Asset Id": '1-3H01',
         "Location Description": "parking lot Thom Thumb store facing Renner Rd",
         "Loss Date - Non UTC": "10/01/2018 06:00:00",
       };
-      simdata = {
-        claimType: 'accident',
-        accidentType: 'other car',
-        location: 'text field',
-        lossDate: '10/10/17',
-        reportedDate: '10/10/2017',
-        policyNumber: 'KM-VEH-005',
-      };
+      // simdata = {
+      //   claimType: 'accident',
+      //   accidentType: 'other car',
+      //   location: 'text field',
+      //   lossDate: '10/10/17',
+      //   reportedDate: '10/10/2017',
+      //   policyNumber: 'KM-VEH-005',
+      // };
       this.setState({adding: "adding",});
       //const claim = callPostApi(url, data, this.postNewClaim);
-      const claim = await this.postNewClaim(url, simdata);
+      const claim = await this.postNewClaim(url, data);
       this.setState({claim: claim, error: false, adding: "true,"});
       const { navigation: { navigate } } = this.props;
       navigate('ReviewClaims');

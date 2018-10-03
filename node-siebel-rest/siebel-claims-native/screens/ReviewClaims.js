@@ -15,7 +15,10 @@ import { callGetApi } from '../utils/rest';
 import ClaimRow from '../components/ClaimRow';
 
 const mapClaim = claim => {
-  const { claimNumber, status, lossDate, policyNumber } = claim;
+  const claimNumber = claim["Claim Number"];
+  const status = null != claim["Status Code"] ? claim["Status Code"] : 'OPEN';
+  const lossDate = claim["Loss Date"];
+  const policyNumber = claim["Policy Number"];
   return {
     key: uuidv4(),
     claimNumber, status, lossDate, policyNumber,
@@ -51,7 +54,8 @@ export default class ReviewClaims extends Component {
 
   async getClaims(url) {
     const json = await callGetApi(url);
-    return json.claims.map(mapClaim);
+    console.log("json,", json);
+    return json.items.map(mapClaim);
   }
 
   renderClaim = ({ item }) => {

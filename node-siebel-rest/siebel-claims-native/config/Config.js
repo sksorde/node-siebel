@@ -4,7 +4,7 @@ const myConfig = {
   siebelUser: 'SADMIN',
   siebelPwd: 'gopravici2018',
   customerId: '1-2RLW',
-  customer: 'Mohammed Abdellah',
+  customer: 'Mohamed Abdellah',
   auth: 'Basic U0FETUlOOmdvcHJhdmljaTIwMTg=',
   simUrl: 'http://192.168.1.106:9999',
 };

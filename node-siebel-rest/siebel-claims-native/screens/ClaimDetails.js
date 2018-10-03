@@ -20,8 +20,8 @@ export default class ClaimDetails extends Component {
   static navigationOptions = ({ navigation: { state: { params } } }) => {
     const { claim } = params;
     return {
-    title: 'Claim Details for ' + claim,
-  };
+      title: 'Claim Details for ' + claim,
+    };
   };
 
   state = {
@@ -33,7 +33,8 @@ export default class ClaimDetails extends Component {
 
   async getClaimDetails(url) {
       const json = await callGetApi(url);
-      return json.claimDetails;
+      console.log('Received', json);
+      return json;
   }
 
   async componentDidMount() {
@@ -52,10 +53,7 @@ export default class ClaimDetails extends Component {
   }
 
   render() {
-    const {
-         loading, error,  } = this.state;
-    const { claimNumber, firstName, lastName, policyNumber, status, lossCode, policyType,
-          }  = this.state.claimDetails;
+    const { loading, error, claimDetails } = this.state;
     return (
       <View style={styles.container}>
         {loading && <ActivityIndicator size="large" />}
@@ -68,12 +66,12 @@ export default class ClaimDetails extends Component {
             initials={getInitials(myConfig.customer)}
             backgroundColor={getAvatarColor(myConfig.customer)}
             />
-            <Text numberOfLines={1}>{firstName} {lastName} </Text>
-            <DetailListItem icon="credit-card" title="Policy#" subtitle={policyNumber} />
-            <DetailListItem icon="credit-card" title="Claim#" subtitle={claimNumber} />
-            <DetailListItem icon="date-range" title="Incident happened " subtitle={lossCode} />
-            <DetailListItem icon="date-range" title="Incident was reported on " subtitle={policyType} />
-            <DetailListItem icon="info" title="Claim Status" subtitle={status} />
+            <Text numberOfLines={1}>{myConfig.customer.split(' ')[0]} {myConfig.customer.split(' ')[1]} </Text>
+            <DetailListItem icon="credit-card" title="Policy#" subtitle={claimDetails["Policy Number"]} />
+            <DetailListItem icon="credit-card" title="Claim#" subtitle={claimDetails["Claim Number"]} />
+            <DetailListItem icon="date-range" title="Incident happened " subtitle={claimDetails["Loss Code"]} />
+            <DetailListItem icon="date-range" title="Incident was reported on " subtitle={claimDetails["Policy Type"]} />
+            <DetailListItem icon="info" title="Claim Status" subtitle={claimDetails["Status Code"]} />
         </View>
       )}
       </View>
