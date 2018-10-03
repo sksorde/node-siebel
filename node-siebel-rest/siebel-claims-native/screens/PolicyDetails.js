@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { MaterialIcons } from '@expo/vector-icons';
+
 import {
   StyleSheet,
   View,
@@ -14,9 +16,17 @@ import { callGetApi } from '../utils/rest';
 import colors from '../utils/colors';
 
 export default class PolicyDetails extends Component {
-  static navigationOptions = {
+  static navigationOptions = ({ navigation: { navigate } }) => ({
     title: myConfig.customer,
-  };
+    headerLeft: (
+      <MaterialIcons
+        name="menu"
+        size={24}
+        style={{ color: colors.black, marginLeft: 10 }}
+        onPress={() => navigate('DrawerToggle')}
+      />
+    ),
+  });
   constructor(props) {
     super(props);
     this.state = {
@@ -69,12 +79,12 @@ export default class PolicyDetails extends Component {
                 <View style={styles.contentContainer}>
                   <Text style={[styles.title]}>Policy #: {policyDetails["Id"]}</Text>
                   <Text style={styles.subtitle}>Policy type: {policyDetails["Type"]}</Text>
-                  <Text style={styles.subtitle}>{policyDetails["Policy Expiration Date"]}}</Text>
+                  <Text style={styles.subtitle}>{policyDetails["Policy Expiration Date"]}</Text>
                 </View>
               </View>
             </View>
 
-            <TouchableHighlight onPress={() => {}}>
+            {/* <TouchableHighlight onPress={() => {}}>
             <View>
             <Icon.Button name="times-circle-o" backgroundColor="#3b5998"
               onPress={() => this.props.navigation.navigate('ReviewClaims')}>
@@ -85,7 +95,7 @@ export default class PolicyDetails extends Component {
               <Text style={{fontFamily: 'Arial', fontSize: 15}}>Add Claim</Text>
             </Icon.Button>
             </View>
-            </TouchableHighlight>
+            </TouchableHighlight> */}
         </View>
       )}
               </View>
@@ -105,11 +115,13 @@ const styles = StyleSheet.create({
     paddingRight: 24,
     borderBottomColor: colors.grey,
     borderBottomWidth: StyleSheet.hairlineWidth,
+    justifyContent: 'center',
   },
   container: {
     flex: 1,
     flexDirection: 'row',
-    alignItems: 'center',
+    //alignItems: 'center',
+    justifyContent: 'center',
   },
   contentContainer: {
     justifyContent: 'center',

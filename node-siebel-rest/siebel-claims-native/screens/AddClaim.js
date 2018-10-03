@@ -9,14 +9,24 @@ import {
   Button,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { MaterialIcons } from '@expo/vector-icons';
+
 import { callPostApi } from '../utils/rest';
 import myConfig from '../config/Config';
 import colors from '../utils/colors';
 import TouchableDetailListItem from '../components/TouchableDetailListItem';
 
 export default class AddClaim extends Component {
-  static navigationOptions = ({ navigation: { state: { params} } }) => ({
+  static navigationOptions = ({ navigation: { navigate } }) => ({
     title: 'Add Accident Claim',
+    headerLeft: (
+      <MaterialIcons
+        name="menu"
+        size={24}
+        style={{ color: colors.black, marginLeft: 10 }}
+        onPress={() => navigate('DrawerToggle')}
+      />
+    ),
   });
 
   state = {

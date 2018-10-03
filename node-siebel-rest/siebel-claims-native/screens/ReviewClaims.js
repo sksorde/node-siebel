@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { MaterialIcons } from '@expo/vector-icons';
 import {
   StyleSheet,
   View,
@@ -13,6 +14,7 @@ import uuidv4 from 'uuid/v4';
 import myConfig from '../config/Config';
 import { callGetApi } from '../utils/rest';
 import ClaimRow from '../components/ClaimRow';
+import colors from '../utils/colors';
 
 const mapClaim = claim => {
   const claimNumber = claim["Claim Number"];
@@ -30,6 +32,14 @@ export default class ReviewClaims extends Component {
 
   static navigationOptions = ({ navigation: { navigate } }) => ({
     title: 'Review Claims',
+    headerLeft: (
+      <MaterialIcons
+        name="menu"
+        size={24}
+        style={{ color: colors.black, marginLeft: 10 }}
+        onPress={() => navigate('DrawerToggle')}
+      />
+    ),
   });
 
   state = {
@@ -67,7 +77,7 @@ export default class ReviewClaims extends Component {
           claimNumber={claimNumber}
           status={status}
           lossDate={ld}
-          onPress={() => navigate('ClaimDetails', { claim: claimNumber })}
+          onPress={() => navigate('ClaimDetails', { claim: item })}
         />
       );
   };

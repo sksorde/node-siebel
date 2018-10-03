@@ -3,24 +3,30 @@ import { TouchableHighlight,
          StyleSheet,
          Text,
        } from 'react-native';
-       import colors from '../utils/colors';
+import colors from '../utils/colors';
+import { MaterialIcons } from '@expo/vector-icons';
+import myConfig from '../config/Config';
 
 export default class StartDemo extends React.Component {
-  constructor() {
-    super();
-    this.onPress = this.onPress.bind(this);
-  }
-
-  onPress() {
-      console.log("pressed!");
-  }
+  static navigationOptions = ({ navigation: { navigate } }) => ({
+    title: 'Siebel Rest Integration',
+    headerLeft: (
+      <MaterialIcons
+        name="menu"
+        size={24}
+        style={{ color: colors.black, marginLeft: 10 }}
+        onPress={() => navigate('DrawerToggle')}
+      />
+    ),
+  });
 
   render() {
+    const { navigation: { navigate } } = this.props;
     return(
       <TouchableHighlight
-        underlayColor={colors.grey}
+        underlayColor={'steelblue'}
         style={styles.container}
-        onPress={this.onPress}
+        onPress={() => {}}
       >
           <Text style={[styles.buttonStyle, styles.mediumText]}>Press to Start Demo</Text>
       </TouchableHighlight>
@@ -30,6 +36,8 @@ export default class StartDemo extends React.Component {
 
 const styles = StyleSheet.create ({
       container: {
+        flex: 1,
+        backgroundColor: '#34495E',
       },
       buttonStyle: {
         fontSize: 24,
