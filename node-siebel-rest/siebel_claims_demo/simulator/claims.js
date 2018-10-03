@@ -2,11 +2,10 @@ var express = require('express')
 var router = express.Router();
 
 var CLAIMS = [
-  {claimNumber: '1-L78XTX', reportedDate: '2/26/2018 11:30 am', policyNumber: 'KM-VEH-005', lastName: 'Abdellah', firstName: 'Mohammed', status: 'OPEN', lossDate:'06/12/2018'},
-  {claimNumber: '1-OOCR13', reportedDate: '2/27/2018 11:30 am', policyNumber: '1G1156K01', lastName: 'tester', firstName: 'first2', status:'OPEN', lossDate:''},
-  {claimNumber: '1710118', reportedDate: '4/26/2018 11:30 am', policyNumber: '1K9087TY02', lastName: 'Abdellah', firstName: 'first3', status:'CLOSED', lossDate:''},
-  {claimNumber: '1710675', reportedDate: '6/26/2018 11:30 am', policyNumber: 'KM-VEH-006', lastName: 'tester', firstName: 'first1'},
-  {claimNumber: '1711379', reportedDate: '5/26/2018 11:30 pm', policyNumber: '1A456YU009', lastName: 'tester', firstName: 'first2'}
+  {"Claim Number": '1-L78XTX', "Policy Number": 'KM-VEH-005', lastName: 'Abdellah', firstName: 'Mohamed', "Status Code": 'OPEN', "Loss Date":'06/12/2018', "Loss Description":"parking lot Thom Thumb store"},
+  {"Claim Number": '1-OOCR13', "Policy Number": 'KM-VEH-005', lastName: 'Abdellah', firstName: 'Mohamed', "Status Code": 'OPEN', "Loss Date":'06/12/2018', "Location Description":"parking lot Thom Thumb store"},
+  {"Claim Number": '1710118', "Policy Number": 'KM-VEH-005', lastName: 'Abdellah', firstName: 'Mohamed', "Status Code": 'OPEN', "Loss Date":'06/12/2018', "Location Description":"parking lot Thom Thumb store"},
+  {"Claim Number": '1710675', "Policy Number": 'KM-VEH-005', lastName: 'Abdellah', firstName: 'Mohamed', "Status Code":'OPEN', "Loss Date":'06/12/2018', "Location Description":"parking lot Thom Thumb store"},
 ];
 
 
@@ -16,14 +15,14 @@ var POLICY = [
   },
 ];
 var DETAILS = [
-  {claimNumber: '1-L78XTX', lossDate:'', policyNumber: 'KM-VEH-005', lastName: 'Abdellah', firstName: 'Mohammed', policyType: 'AUTO', status: 'OPEN', lossCode:''},
-  {claimNumber: '1-OOCR13', lossDate: '', policyNumber: '1G1156K01', lastName: 'tester', firstName: 'first2', policyType: 'AUTO', status: 'OPEN', lossCode:''},
-  {claimNumber: '1710118', lossDate: '', policyNumber: '1K9087TY02', lastName: 'tester', firstName: 'first3', policyType: 'AUTO', status: 'OPEN', lossCode:''},
-  {claimNumber: '1710675', lossDate: '', policyNumber: 'KM-VEH-006', lastName: 'tester', firstName: 'first1', policyType: 'AUTO', status: 'OPEN', lossCode:''},
-  {claimNumber: '1711379', lossDate: '', policyNumber: '1A456YU009', lastName: 'tester', firstName: 'first2', policyType: 'AUTO', status: 'OPEN', lossCode:''}
+  {"Claim Number": '1-L78XTX', "Loss Date":'', "Policy Number": 'KM-VEH-005', lastName: 'Abdellah', firstName: 'Mohammed', "Policy Type": 'AUTO', "Status Code": 'OPEN', "Loss Code":''},
+  {"Claim Number": '1-OOCR13', "Loss Date": '', "Policy Number": '1G1156K01', lastName: 'tester', firstName: 'first2', "Policy Type": 'AUTO', "Status Code": 'OPEN', "Loss Code":''},
+  {"Claim Number": '1710118', "Loss Date": '', "Policy Number": '1K9087TY02', lastName: 'tester', firstName: 'first3', "Policy Type": 'AUTO', "Status Code": 'OPEN', "Loss Code":''},
+  {"Claim Number": '1710675', "Loss Date": '', "Policy Number": 'KM-VEH-006', lastName: 'tester', firstName: 'first1', "Policy Type": 'AUTO', "Status Code": 'OPEN', "Loss Code":''},
+  {"Claim Number": '1711379', "Loss Date": '', "Policy Number": '1A456YU009', lastName: 'tester', firstName: 'first2', "Policy Type": 'AUTO', "Status Code": 'OPEN', "Loss Code":''}
 ];
 
-function findDetail(detail) { 
+function findDetail(detail) {
   return DETAILS.filter(function(elem) {
 	return detail === elem.claimNumber ? elem : '{}';
   })
@@ -36,7 +35,7 @@ router.use(function timeLog(req, res, next) {
 
 router.get('/allClaims/:user', function(req, res) {
     console.log('user:', req.params.user);
-    var data = JSON.stringify({claims: CLAIMS.filter(claim => {
+    var data = JSON.stringify({items: CLAIMS.filter(claim => {
                  return claim.lastName === req.params.user.split(' ')[1] })
                               });
     res.set({'Content-Type': 'Application/json',
@@ -45,19 +44,18 @@ router.get('/allClaims/:user', function(req, res) {
     console.log(data);
 })
 
-router.get('/claimDetails/:claimId', (req, res) => { 
+router.get('/claimDetails/:claimId', (req, res) => {
     console.log('claimId:', req.params.claimId);
-    var data = JSON.stringify({claimDetails:findDetail(req.params.claimId)[0] 
-                  });
+    var data = findDetail(req.params.claimId)[0];
     res.set({'Content-Type': 'Application/json',
              'Access-Control-Allow-Origin': '*'});
-    res.status(200).jsonp(data);
+    res.status(200).jsonp(JSON.stringify(data));
     console.log(data);
 })
 
 router.get('/policyDetails/:user', (req, res) => {
     var data = POLICY.find(detail => {
-              return detail["Primary Last Name"] === req.params.user.split(' ')[1]}); 
+              return detail["Primary Last Name"] === req.params.user.split(' ')[1]});
 
     res.set({'Content-Type': 'Application/json',
              'Access-Control-Allow-Origin': '*'});
@@ -65,25 +63,23 @@ router.get('/policyDetails/:user', (req, res) => {
     console.log(data);
 })
 
-router.post('/addClaim/:user', (req, res) => {
+router.put('/addClaim/:user', (req, res) => {
     console.log('addClaim:', req.body);
     console.log(CLAIMS.length);
     var data = {
-                'claimNumber':'GM' + Math.floor(Math.random() * 1000) + 1000,
-                'reportedDate':req.body.reportedDate ,
-                'policyNumber':req.body.policyNumber ,
-                'lastName':'Abdellah' , 
-                'firstName': 'Mohammed',
-                'status': 'OPEN', 
-                'lossDate':req.body.lossDate,
-		'policyType':'AUTO',
-		'lossCode':'C'
+                "Claim Number":'GM' + Math.floor(Math.random() * 1000) + 1000,
+                "Policy Number":req.body["Asset Id"],
+                "Location Description": req.body["Location Description"],
+		"Loss Date": req.body["Loss Date - Non UTC"],
+		"lastName": req.params.user.split(' ')[1],
+		"firstName": req.params.user.split(' ')[0],
                 };
     CLAIMS.push(data);
+    DETAILS.push(data);
     res.set({'Content-Type': 'Application/json',
              'Access-Control-Allow-Origin': '*'});
-    res.status(201).json(JSON.stringify({claim: data}));
-    console.log(JSON.stringify({claim: data}));
+    res.status(201).json(JSON.stringify({Id: data["Claim Number"]}));
+    console.log(JSON.stringify(CLAIMS));
     console.log(CLAIMS.length);
 })
 
