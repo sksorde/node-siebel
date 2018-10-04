@@ -4,7 +4,7 @@ var app = express()
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
-var claims = require('./claims');
+var claims = require('./claimsserver');
 
 app.use('/claims', claims)
 
