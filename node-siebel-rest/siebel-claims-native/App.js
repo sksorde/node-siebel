@@ -8,6 +8,9 @@ import {
 import AppNavigator from './routes';
 import StartDemo from './screens/StartDemo';
 
+if (Text.defaultProps == null) Text.defaultProps = {};
+Text.defaultProps.allowFontScaling = false;
+
 export default function App() {
 
   return <AppNavigator />;
