@@ -20,19 +20,3 @@ export default function App() {
   // </View>
 
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#34495E',
-  },
-textStyle: {
-    textAlign: 'center',
-    fontFamily: 'AvenirNext-Regular',
-  },
-  largeText: {
-    fontSize: 44,
-  },
-  smallText: {
-    fontSize: 18,
-  },
-});

@@ -44,14 +44,14 @@ export default class AddClaim extends Component {
  async updateSiebel() {
    try {
       var url = `${myConfig.simUrl}/claims/addClaim/${myConfig.customer}`;
-      //var url = `https://13.58.101.5:9301/siebel/v1.0/data/Demo INS Claims/INS Claims/`;
+      //var url = `https://win-b1ejslvnv0l.siebel-pravici.com:9301/siebel/v1.0/data/Demo INS Claims/INS Claims/`;
       console.log(url);
       data = {
-        Id: 'New Claim',
-        "Asset Id": '1-3H01',
-        "Location Description": "parking lot Thom Thumb store facing Renner Rd",
-        "Loss Date - Non UTC": "10/01/2018 06:00:00",
-      };
+                "Id": "New claim",
+                "Asset Id": "1-3H01",
+                "Location Description": "parking lot Thom Thumb store facing Renner Rd",
+                "Loss Date - Non UTC": "10/01/2018 06:00:00"
+              };
       // simdata = {
       //   claimType: 'accident',
       //   accidentType: 'other car',

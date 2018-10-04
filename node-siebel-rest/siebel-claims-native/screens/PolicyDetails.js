@@ -50,7 +50,7 @@ export default class PolicyDetails extends Component {
 
   async componentDidMount() {
     //var url = `${myConfig.siebelUrl}/siebel/v1.0/data/Contact/Contact/${myConfig.customerId}/INS Policy`;
-    var url = myConfig.simUrl + '/claims/policyDetails/' + encodeURIComponent(this.state.customer);
+    var url = `${myConfig.simUrl}/claims/policyDetails/${this.state.customer}`;
     try {
       console.log(url);
       const policyDetails = await this.getPolicyDetails(url);
@@ -70,7 +70,7 @@ export default class PolicyDetails extends Component {
     return (
       <View>
         {loading && <ActivityIndicator size="large" />}
-        {error && <Text>Error trying to setup: {error}</Text>}
+        {error !== false && <Text>Error trying to setup: {error}</Text>}
         {!loading &&
           !error && (
       <View style={styles.borderContainer}>
@@ -79,7 +79,7 @@ export default class PolicyDetails extends Component {
                 <View style={styles.contentContainer}>
                   <Text style={[styles.title]}>Policy #: {policyDetails["Id"]}</Text>
                   <Text style={styles.subtitle}>Policy type: {policyDetails["Type"]}</Text>
-                  <Text style={styles.subtitle}>{policyDetails["Policy Expiration Date"]}</Text>
+                  <Text style={styles.subtitle}>Effective: {policyDetails["Policy Version Date"]}</Text>
                 </View>
               </View>
             </View>
@@ -132,13 +132,13 @@ const styles = StyleSheet.create({
     height: 80
   },
   title: {
-    color: colors.blue,
+    color: 'steelblue',
     fontWeight: 'bold',
     fontSize: 16,
     alignSelf: 'center'
   },
   subtitle: {
-    color: colors.blue,
+    color: 'steelblue',
     fontSize: 15,
     marginTop: 4,
     alignSelf: 'center',

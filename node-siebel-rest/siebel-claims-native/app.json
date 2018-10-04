@@ -1,5 +1,11 @@
 {
   "expo": {
-    "sdkVersion": "27.0.0"
+    "name": "siebel-claims-native",
+    "slug": "siebel-claims",
+    "sdkVersion": "27.0.0",
+    "privacy": "public",
+    "ios": {
+      "bundleIdentifier": "com.pravici.siebel-claims"
+    },
   }
 }

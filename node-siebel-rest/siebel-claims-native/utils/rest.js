@@ -19,7 +19,7 @@ export const callGetApi = async (url) => {
       //body: '', // body data type must match "Content-Type" header
     });
     const body = await response.json();
-
+console.log(response.status, body);
     if (response.status !== 200) throw Error(body.message);
     console.log(response.status, body);
 
@@ -70,7 +70,7 @@ export const callPostApi = async (url, data) => {
           headers: {
               "Content-Type": "application/json; charset=utf-8",
               'Authorization': myConfig.auth,
-              //"Accept": "application/json"
+              "Accept": "application/json"
               // "Content-Type": "application/x-www-form-urlencoded",
           },
           //redirect: "follow", // manual, *follow, error

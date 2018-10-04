@@ -18,8 +18,8 @@ import colors from '../utils/colors';
 
 const mapClaim = claim => {
   const claimNumber = claim["Claim Number"];
-  const status = null != claim["Status Code"] ? claim["Status Code"] : 'OPEN';
-  const lossDate = claim["Loss Date"];
+  const status = "" != claim["Status Code"] ? claim["Status Code"] : 'OPEN';
+  const lossDate = "" != claim["Loss Date"] ? claim["Loss Date"] : 'Not Available';
   const policyNumber = claim["Policy Number"];
   return {
     key: uuidv4(),
@@ -51,6 +51,7 @@ export default class ReviewClaims extends Component {
 
   async componentDidMount() {
     var url = myConfig.simUrl + '/claims/allClaims/' + encodeURIComponent(this.state.holder);
+    //var url = `https://win-b1ejslvnv0l.siebel-pravici.com:9301/siebel/v1.0/data/Demo INS Claims/INS Claims`;
     try {
       const claims = await this.getClaims(url);
       this.setState({claims,loading: false, error: false,});
