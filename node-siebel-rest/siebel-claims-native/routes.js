@@ -7,7 +7,12 @@ import ReviewClaims from './screens/ReviewClaims';
 import ClaimDetails from './screens/ClaimDetails';
 import AddClaim from './screens/AddClaim';
 import PhotoPage from './screens/PhotoPage';
+import DatePicker from './screens/DatePicker';
 
+import { Text } from 'react-native';
+
+if (Text.defaultProps == null) Text.defaultProps = {};
+Text.defaultProps.allowFontScaling = false;
 
 const getDrawerItemIcon = icon => ({ tintColor }) => (
   <MaterialIcons name={icon} size={22} style={{ color: tintColor }} />
@@ -40,6 +45,9 @@ const modScreen = StackNavigator (
     },
     ReviewClaims: {
       screen: ReviewClaims,
+    },
+    DatePicker: {
+      screen: DatePicker,
     },
   },
   {
@@ -82,5 +90,5 @@ export default DrawerNavigator(
       screen: modScreen,
     },
   },
-  
+
 );

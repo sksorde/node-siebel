@@ -35,7 +35,7 @@ export default class ClaimDetails extends Component {
 
   async getClaimDetails(url) {
       const json = await callGetApi(url);
-      console.log('Received', json);
+      console.log('CLAIM DETAILS', json);
       return json;
   }
 
@@ -59,6 +59,7 @@ export default class ClaimDetails extends Component {
 
   render() {
     const { loading, error, claimDetails, claimNumber, lossDate } = this.state;
+    console.log(claimDetails["Loss Date - Non UTC"]);
     return (
       <View style={styles.container}>
         {loading && <ActivityIndicator size="large" />}
@@ -74,9 +75,9 @@ export default class ClaimDetails extends Component {
             <Text numberOfLines={1}>{myConfig.customer.split(' ')[0]} {myConfig.customer.split(' ')[1]} </Text>
             <DetailListItem icon="credit-card" title="Policy#" subtitle={claimDetails["Policy Number"]} />
             <DetailListItem icon="credit-card" title="Claim#" subtitle={claimNumber} />
-            <DetailListItem icon="date-range" title="Incident happened on " subtitle={lossDate} />
-            <DetailListItem icon="date-range" title="Policy Type " subtitle={claimDetails["Type"]} />
-            <DetailListItem icon="info" title="Claim Status" subtitle={claimDetails["Sub Status"]} />
+            <DetailListItem icon="date-range" title="Incident happened on " subtitle={claimDetails["Loss Date - Non UTC"]} />
+            <DetailListItem icon="date-range" title="Policy Type " subtitle={claimDetails["Policy Type"]} />
+            <DetailListItem icon="info" title="Claim Status" subtitle={claimDetails["Status Code"] ? claimDetails["Status Code"] : "OPEN"} />
         </View>
       )}
       </View>

@@ -33,6 +33,7 @@ export default class AddClaim extends Component {
       claim: [],
       error: false,
       adding: "false",
+      lossDate:new Date(),
   };
 
   async postNewClaim(url, data) {
@@ -40,6 +41,18 @@ export default class AddClaim extends Component {
     console.log('json:', jsondata);
     return jsondata['Id'];
   }
+
+ setDateOfIncident(selectedDate) {
+   this.setState({lossDate: selectedDate});
+   console.log('lossDate', selectedDate);
+ }
+
+ getFormattedDate(date) {
+   var mm = date.getMonth();
+   var dd = date.getDate();
+   var yyyy = date.getFullYear();
+   return mm + '/' + dd +'/' + yyyy +' 07:00:00';
+ }
 
  async updateSiebel() {
    try {
@@ -50,7 +63,7 @@ export default class AddClaim extends Component {
                 "Id": "New claim",
                 "Asset Id": "1-3H01",
                 "Location Description": "parking lot Thom Thumb store facing Renner Rd",
-                "Loss Date - Non UTC": "10/01/2018 06:00:00"
+                "Loss Date - Non UTC": this.getFormattedDate(this.state.lossDate),
               };
       // simdata = {
       //   claimType: 'accident',
@@ -83,9 +96,10 @@ export default class AddClaim extends Component {
       {error && <Text>{error}</Text>}
       {adding == "false" &&
         !error && (
-          <View>
+          <View style={styles.container}>
           <TouchableDetailListItem icon="info" title="Accident Type " rightIcon="chevron-right" />
-          <TouchableDetailListItem icon="date-range" title="Date & Location" rightIcon="chevron-right" />
+          <TouchableDetailListItem icon="date-range" title="Date & Location" rightIcon="chevron-right"
+           onPress={() => navigate('DatePicker', { show : true , returnData : this.setDateOfIncident.bind(this)})}/>
           <TouchableDetailListItem
             icon="camera"
             title="Pictures of the Incident"
@@ -93,7 +107,7 @@ export default class AddClaim extends Component {
             onPress = {() => navigate('PhotoPage', { claim: this.state.claimNumber })}
           />
           <TouchableDetailListItem icon="verified-user" title="Contact Info" rightIcon="chevron-right" />
-          <TouchableDetailListItem icon="traffic" title="Other Driver's Info" rightIcon="chevron-right" />
+          <TouchableDetailListItem icon="traffic" title="Other Driver's Info" rightIcon="chevron-right"/>
           <TouchableHighlight onPress={() => this.updateSiebel()}
             underlayColor={colors.grey}
             style={styles.touchContainer}

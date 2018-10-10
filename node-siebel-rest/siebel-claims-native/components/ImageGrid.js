@@ -1,110 +1,83 @@
-import { CameraRoll, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import { Permissions } from 'expo';
-import PropTypes from 'prop-types';
-import React from 'react';
+import React, { Component } from 'react';
+import {
+  AppRegistry,
+  StyleSheet,
+  Text,
+  View
+} from 'react-native';
 
-import Grid from './Grid';
+import CameraRollPicker from 'react-native-camera-roll-picker';
 
-const keyExtractor = ({ uri }) => uri;
+export default class ImageGrid extends Component {
+  constructor(props) {
+    super(props);
 
-export default class ImageGrid extends React.Component {
-  static propTypes = {
-    onPressImage: PropTypes.func,
-  };
-
-  static defaultProps = {
-    onPressImage: () => {},
-  };
-
-  // eslint-disable-next-line react/sort-comp
-  loading = false;
-  cursor = null;
-
-  state = {
-    images: [],
-  };
-
-  componentDidMount() {
-    this.getImages();
+    this.state = {
+      num: 0,
+      selected: [],
+    };
   }
 
-  getImages = async after => {
-    if (this.loading) return;
+  getSelectedImages(images, current) {
+    var num = images.length;
 
-    const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-
-    if (status !== 'granted') {
-      console.log('Camera roll permission denied');
-      return;
-    }
-
-    this.loading = true;
-
-    const results = await CameraRoll.getPhotos({
-      first: 20,
-      after,
+    this.setState({
+      num: num,
+      selected: images,
     });
 
-    const { edges, page_info: { has_next_page, end_cursor } } = results;
-
-    const loadedImages = edges.map(item => item.node.image);
-
-    this.setState(
-      {
-        images: this.state.images.concat(loadedImages),
-      },
-      () => {
-        this.loading = false;
-        this.cursor = has_next_page ? end_cursor : null;
-      },
-    );
-  };
-
-  getNextImages = () => {
-    // Prevent loading the initial page after we've reached the end
-    if (!this.cursor) return;
-
-    this.getImages(this.cursor);
-  };
-
-  renderItem = ({ item: { uri }, size, marginTop, marginLeft }) => {
-    const { onPressImage } = this.props;
-
-    const style = {
-      width: size,
-      height: size,
-      marginLeft,
-      marginTop,
-    };
-
-    return (
-      <TouchableOpacity
-        key={uri}
-        activeOpacity={0.75}
-        onPress={() => onPressImage(uri)}
-        style={style}
-      >
-        <Image source={{ uri }} style={styles.image} />
-      </TouchableOpacity>
-    );
-  };
+    console.log(current);
+    console.log(this.state.selected);
+  }
 
   render() {
-    const { images } = this.state;
-
     return (
-      <Grid
-        data={images}
-        renderItem={this.renderItem}
-        keyExtractor={keyExtractor}
-        onEndReached={this.getNextImages}
-      />
+      <View style={styles.container}>
+        <View style={styles.content}>
+          <Text style={styles.text}>
+            <Text style={styles.bold}> {this.state.num} </Text> images has been selected
+          </Text>
+        </View>
+        <CameraRollPicker
+          scrollRenderAheadDistance={500}
+          initialListSize={1}
+          pageSize={3}
+          removeClippedSubviews={false}
+          groupTypes='SavedPhotos'
+          batchSize={5}
+          maximum={3}
+          selected={this.state.selected}
+          assetType='Photos'
+          imagesPerRow={3}
+          imageMargin={5}
+          callback={this.getSelectedImages.bind(this)} />
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  image: {
+  container: {
     flex: 1,
+    backgroundColor: '#F6AE2D',
+  },
+  content: {
+    marginTop: 15,
+    height: 50,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+  },
+  text: {
+    fontSize: 16,
+    alignItems: 'center',
+    color: '#fff',
+  },
+  bold: {
+    fontWeight: 'bold',
+  },
+  info: {
+    fontSize: 12,
   },
 });

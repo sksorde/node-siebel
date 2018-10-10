@@ -9,17 +9,17 @@ import {
   FlatList,
 } from 'react-native';
 import uuidv4 from 'uuid/v4';
+import {CheckBox} from 'react-native-elements';
 
 import myConfig from '../config/Config';
 import { callGetApi } from '../utils/rest';
 import ClaimRow from '../components/ClaimRow';
 import ImageGrid from '../components/ImageGrid';
 
-
 export default class PhotoPage extends Component {
 
   static navigationOptions = ({ navigation: { navigate } }) => ({
-    title: 'Photo Gallery',
+    title: 'Select Photos',
   });
 
   state = {
@@ -27,14 +27,27 @@ export default class PhotoPage extends Component {
     claims: [],
     loading: true,
     error: false,
+    selectedUris: [],
   };
+
+  selectImage = (id) => {
+    var index = this.state.selectedUris.indexOf(id);
+    console.log("index", index);
+    if (index !== -1)
+      this.setState({selectedUris: this.state.selectedUris.splice(index, 1)});
+    else {
+      this.setState({selectedUris: this.state.selectedUris.concat(id),});
+    }
+  }
 
   render() {
     const { loading, claims, error, } = this.state;
     return (
       <View style={styles.container}>
         <View style={styles.inputMethodEditor}>
-          <ImageGrid onPressImage={() => {}} />
+          <ImageGrid
+
+          />
         </View>
       </View>
     );

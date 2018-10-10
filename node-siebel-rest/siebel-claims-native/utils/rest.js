@@ -19,9 +19,9 @@ export const callGetApi = async (url) => {
       //body: '', // body data type must match "Content-Type" header
     });
     const body = await response.json();
-console.log(response.status, body);
+    console.log(response.status);
     if (response.status !== 200) throw Error(body.message);
-    console.log(response.status, body);
+    //console.log(response.status, body);
 
     return JSON.parse(body);
 } catch (e) {

@@ -65,7 +65,7 @@ export default class ReviewClaims extends Component {
 
   async getClaims(url) {
     const json = await callGetApi(url);
-    console.log("json,", json);
+    //console.log("json,", json);
     return json.items.map(mapClaim);
   }
 

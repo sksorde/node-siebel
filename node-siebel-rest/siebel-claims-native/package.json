@@ -24,6 +24,9 @@
     "react": "16.3.1",
     "react-native": "~0.55.2",
     "react-native-base64": "^0.0.1",
+    "react-native-camera-roll-picker": "^1.2.3",
+    "react-native-elements": "^0.19.1",
+    "react-native-modal-datetime-picker": "^6.0.0",
     "react-navigation": "1.5.11"
   }
 }
