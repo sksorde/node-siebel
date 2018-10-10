@@ -54,7 +54,7 @@ router.get('/allClaims/:user', function(req, res) {
 router.get('/claimDetails/:claimId', (req, res) => {
     console.log('claimId:', req.params.claimId);
 
-    var url = siebelUrl + '/siebel/v1.0/data/Demo INS Policy/INS Policy/1-3H01';
+    var url = siebelUrl + '/siebel/v1.0/data/Demo INS Claims/INS Claims/' + req.params.claimId;
     process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
     request.get({url}, (err, httpResponse, body) => {
       if (err) {
