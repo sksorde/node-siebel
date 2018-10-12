@@ -27,9 +27,9 @@ yarn start
 
 ### The above command starts the app and displays a QR code on the console.
 ```
-- cd node-siebel/node-siebel-rest/siebel_claims_demo/simulator
- - npm install
- - node app.js
+cd node-siebel/node-siebel-rest/siebel_claims_demo/simulator
+npm install
+node app.js
 ```
 To test:
  - Install Expo on the mobile device (IOS or Android device)
