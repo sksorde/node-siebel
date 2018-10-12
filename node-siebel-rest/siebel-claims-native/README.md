@@ -4,7 +4,7 @@ Below you'll find information about performing common tasks. The most recent ver
 
 ## Siebel Claims Demo
 
-This project was built using React-native and deployed to Expo. Yarn was the nuild tool.
+This project was built using React-native and deployed to Expo. Yarn was the build tool.
 It requires the following dev tools installed on the build machine:
  - Nodejs
  - Yarn
@@ -16,11 +16,13 @@ It requires the following dev tools installed on the build machine:
 ## Build for development
 
 - Clone the project from git:
+```
 git clone https://github.com/Pravici/node-siebel.git
 
-- cd to node-siebel/node-siebel-rest/siebel-claims-native folder
-  - yarn
-  - yarn start
+cd node-siebel/node-siebel-rest/siebel-claims-native
+yarn
+yarn start
+```
 
 ### The above command starts the app and displays a QR code on the console.
 
@@ -38,7 +40,9 @@ To test:
  This process deploys the app for any user to test on Cellular data or Wifi.
 
  From within the node-siebel/node-siebel-rest/siebel-claims-native folder, execute the following command:
+ ```
  expo-cli build:ios -t simulator
+ ```
 
  This command publishes the app to https://expo.io/@anura/siebel-claims
 
