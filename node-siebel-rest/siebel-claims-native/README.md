@@ -19,19 +19,19 @@ It requires the following dev tools installed on the build machine:
 git clone https://github.com/Pravici/node-siebel.git
 
 - cd to node-siebel/node-siebel-rest/siebel-claims-native folder
-  yarn
-  yarn start
+  - yarn
+  - yarn start
 
 ### The above command starts the app and displays a QR code on the console.
 
 - cd to node-siebel/node-siebel-rest/siebel_claims_demo/simulator
- npm install
- node app.js
+ - npm install
+ - node app.js
 
 To test:
  - Install Expo on the device (IOS or Android device)
   Login into Expo, using the following credentials:
-   anura/test123
+  - anura/test123
  - Scan the QR code from the console OR send the URL to the device by text
 
  ## Build for deployment to Expo
