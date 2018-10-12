@@ -4,7 +4,8 @@ Below you'll find information about performing common tasks. The most recent ver
 
 ## Siebel Claims Demo
 
-This project was built using React-native and deployed to Expo. Yarn was the build tool.
+This project was built using React-native and deployed to Expo. Yarn was the build tool. The intended target for this project is a mobile device - IOS or android.
+
 It requires the following dev tools installed on the build machine:
  - Nodejs
  - Yarn
@@ -25,13 +26,13 @@ yarn start
 ```
 
 ### The above command starts the app and displays a QR code on the console.
-
-- cd to node-siebel/node-siebel-rest/siebel_claims_demo/simulator
+```
+- cd node-siebel/node-siebel-rest/siebel_claims_demo/simulator
  - npm install
  - node app.js
-
+```
 To test:
- - Install Expo on the device (IOS or Android device)
+ - Install Expo on the mobile device (IOS or Android device)
   Login into Expo, using the following credentials:
   - anura/test123
  - Scan the QR code from the console OR send the URL to the device by text
@@ -39,7 +40,7 @@ To test:
  ## Build for deployment to Expo
  This process deploys the app for any user to test on Cellular data or Wifi.
 
- From within the node-siebel/node-siebel-rest/siebel-claims-native folder, execute the following command:
+ From within the node-siebel/node-siebel-rest/siebel-claims-native folder, execute the following command (it builds for IOS AND Android devices):
  ```
  expo-cli build:ios -t simulator
  ```
