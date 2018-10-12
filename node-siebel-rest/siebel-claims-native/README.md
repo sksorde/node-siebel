@@ -19,13 +19,12 @@ It requires the following dev tools installed on the build machine:
 - Clone the project from git:
 ```
 git clone https://github.com/Pravici/node-siebel.git
-
 cd node-siebel/node-siebel-rest/siebel-claims-native
 yarn
 yarn start
 ```
 
-### The above command starts the app and displays a QR code on the console.
+The above command starts the app and displays a QR code on the console.
 ```
 cd node-siebel/node-siebel-rest/siebel_claims_demo/simulator
 npm install
@@ -37,7 +36,7 @@ To test:
   - anura/test123
  - Scan the QR code from the console OR send the URL to the device by text
 
- ## Build for deployment to Expo
+## Build for deployment to Expo
  This process deploys the app for any user to test on Cellular data or Wifi.
 
  From within the node-siebel/node-siebel-rest/siebel-claims-native folder, execute the following command (it builds for IOS AND Android devices):
@@ -48,10 +47,10 @@ To test:
  This command publishes the app to https://expo.io/@anura/siebel-claims
 
  Any device that has signed into the Expo app can access the app and test it.
- 
- ## Additional Information for Developers
- Configuration for this project is in node-siebel-rest/siebel-claims-native/config folder. Edit the Config.js file to modify access to the tunneling server:
 
+## Additional Information for Developers
+ Configuration for this project is in node-siebel-rest/siebel-claims-native/config folder. Edit the Config.js file to modify access to the tunneling server:
+```
   customerId: '1-2RLW',
   customer: 'Mohamed Abdellah',
   simUrl: 'http://13.58.101.5:9999',
