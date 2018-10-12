@@ -23,6 +23,7 @@ export default class DatePicker extends Component {
   };
 
   _updateDate = (newdate) => {
+    console.log('newdate', newdate);
     this.setState({selectedDate: newdate,});
   }
 

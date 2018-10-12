@@ -48,10 +48,11 @@ export default class AddClaim extends Component {
  }
 
  getFormattedDate(date) {
-   var mm = date.getMonth();
+   var mm = date.getMonth() + 1;
    var dd = date.getDate();
    var yyyy = date.getFullYear();
-   return mm + '/' + dd +'/' + yyyy +' 07:00:00';
+   return mm + '/' + dd +'/' + yyyy +' '+
+   date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
  }
 
  async updateSiebel() {
