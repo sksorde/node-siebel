@@ -79,7 +79,7 @@ export default class PolicyDetails extends Component {
                 <View style={styles.contentContainer}>
                   <Text style={[styles.title]}>Policy #: {policyDetails["Id"]}</Text>
                   <Text style={styles.subtitle}>Policy type: {policyDetails["Type"]}</Text>
-                  <Text style={styles.subtitle}>Effective: {policyDetails["Policy Version Date"]}</Text>
+                  <Text style={styles.subtitle}>Expires: {policyDetails["Expiration Date"]}</Text>
                 </View>
               </View>
             </View>

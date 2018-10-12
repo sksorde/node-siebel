@@ -60,6 +60,7 @@ export default class ClaimDetails extends Component {
   render() {
     const { loading, error, claimDetails, claimNumber, lossDate } = this.state;
     console.log(claimDetails["Loss Date - Non UTC"]);
+    const policyType = claimDetails["Policy Type"] !== "" ? claimDetails["Policy Type"] : "Auto";
     return (
       <View style={styles.container}>
         {loading && <ActivityIndicator size="large" />}
