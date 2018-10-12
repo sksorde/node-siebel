@@ -48,3 +48,45 @@ To test:
  This command publishes the app to https://expo.io/@anura/siebel-claims
 
  Any device that has signed into the Expo app can access the app and test it.
+ 
+ ## Additional Information for Developers
+ Configuration for this project is in node-siebel-rest/siebel-claims-native/config folder. Edit the Config.js file to modify access to the tunneling server:
+
+  customerId: '1-2RLW',
+  customer: 'Mohamed Abdellah',
+  simUrl: 'http://13.58.101.5:9999',
+ ```
+### Tunneling Server
+The following folder contains the code for Nodejs server that receives requests from mobile device and forwards to Siebel server in a secure manner: node-siebel/node-siebel-rest/siebel_claims_demo/simulator
+
+### Mapping between mobile and Siebel End Points
+```
+GET ${myConfig.simUrl}/claims/policyDetails/${myConfig.customer} => 
+<SiebelUrl>/siebel/v1.0/data/Demo INS Policy/INS Policy/<policy Number>
+```
+
+```
+GET
+${myConfig.simUrl}/claims/allClaims/${myConfig.customer} =>
+<SiebelUrl>/siebel/v1.0/data/Demo INS Claims/INS Claims
+```
+
+```
+GET
+${myConfig.simUrl}/claims/claimDetails/<Claim Number> =>
+<SiebelUrl>/siebel/v1.0/data/Demo INS Claims/INS Claims/<claim Number>
+```
+
+```
+PUT
+${myConfig.simUrl}/addClaim/${myConfig.customer} =>
+<SiebelUrl/siebel/v1.0/data/Demo INS Claims/INS Claims
+
+Payload:
+{
+  "Id": "New claim",
+  "Asset Id": "1-3H01",
+  "Location Description": "parking lot Thom Thumb store",
+  "Loss Date - Non UTC": "mm/dd/yyyy hh:mm::ss",
+}
+```
